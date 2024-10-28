@@ -9,7 +9,7 @@ class human
 private:
 	int age;
 	char* fio;
-	char number_phone[SIZE];
+	char number_phone[SIZE];//строка занимает меньше памяти, поэтому тип данных char
 
 public:
 	human(int age_p, const char* fio_p, const char* num_phone_p);
@@ -20,26 +20,19 @@ public:
 	{
 		strcpy_s(fio, strlen(human_p.fio) + 1, human_p.fio);
 	}
-
+	//модификаторы и аксессоры
 	void set_age(int age_p)
 	{
 		age = age_p;
 	}
 
-	void set_number_phone(char* num_phone_p)
+	void set_number_phone(const char* num_phone_p)
 	{
 		strcpy_s(number_phone, SIZE, num_phone_p);
 	}
 
-	void set_fio(const char* fio_p)
-	{
-		int size = strlen(fio_p) + 1;
+	void set_fio(const char* fio_p);
 
-		delete[] fio;
-
-		fio = new char[size];
-		strcpy_s(fio, size, fio_p);
-	}
 
 	int age_get() const
 	{
@@ -56,6 +49,13 @@ public:
 		return fio;
 	}
 	
+	void print() const// ввывод информации о человеке
+	{
+		cout << "возраст " << age;
+		printf("фио %s",fio);
+		printf("номер телефона %s",number_phone);
+	}
+
 	~human()//деструктор
 	{
 		delete[] fio;
