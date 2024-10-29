@@ -43,16 +43,16 @@ void home:: set_apartaments(const apartment* apartaments_p, int size_p)
 
 void home::print() const//показывает всю информацию о доме
 {
-	cout << "\nквартиры\n";
+	cout << "\nквартиры \n";
 	for (int i = 0; i < size; i++)
 	{
 		apartaments[i].print();
 	}
 
-	cout << "\nколичество квартир" << size + 1;
+	cout << "\nколичество квартир " << size + 1;
 
-	printf("номер дома %s", home_number);
-	printf("улица %s", street);
+	printf("\nномер дома %s", home_number);
+	printf("\nулица %s", street);
 }
 
 apartment* home::adding(const apartment* apartaments)//добавление в массив объектов apartaments новой квартиры

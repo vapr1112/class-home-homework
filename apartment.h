@@ -14,7 +14,6 @@ public:
 
 	apartment() : apartment(nullptr, 0, "\0", "\0") {};// конструктор по умолчанию
 
-	//конструктор копирования
 	apartment(const apartment& apartaments_p);//конструктор копирования
 
 	//модификаторы и аксессоры

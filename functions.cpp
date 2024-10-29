@@ -6,7 +6,7 @@ void print(home house)
 
 	enum menu {HOME = 1, APARTAMENT, HUMAN};
 
-	cout << "введите, что посмотреть \n1 дом \n2 квартира \n3 человек\n";
+	cout << "\nвведите, что посмотреть \n1 дом \n2 квартира \n3 человек\n";
 
 	cin >> user;
 
@@ -16,13 +16,43 @@ void print(home house)
 		house.print();
 		break;
 	case APARTAMENT:
+		for (int i = 0; i < house.get_size(); i++)
+		{
+			house.get_apartaments()[i].print();
+		}
 		break;
 	case HUMAN:
-		//for (int i = 0; i < house.get_size(); i++)
-		//{
-		//	for (int j = 0; j < house.get)
-		//}
+		for (int i = 0; i < house.get_size(); i++)
+		{
+			for (int j = 0; j < house.get_apartaments()[i].get_size(); j++)
+			{
+				house.get_apartaments()[i].print();
+			}
+		}
+		break;
 	default:
 		break;
 	}
+}
+
+void adding(home house)
+{
+	int user;
+
+	enum menu {APART = 1, HUMAN};
+
+	cout << "\nвыберите, что добавить 1 квартиру 2 человека\n";
+
+	cin >> user;
+
+	switch (user)
+	{
+	case APART:
+		
+		house.set_apartaments(house.adding(house.get_apartaments()), house.get_size());
+		break;
+	default:
+		break;
+	}
+
 }
