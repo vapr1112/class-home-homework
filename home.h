@@ -5,7 +5,7 @@ class home
 {
 private:
 	apartment* apartaments;//дом содержит массив объектов(квартиры)
-	int size;
+	int size;// относится к массиву объектов apartaments
 	char home_number[SIZE];
 	char street[SIZE];
 
@@ -13,13 +13,13 @@ public:
 
 	home(apartment* apartaments_p, int size, const char* home_number_p, const char* street_p);
 	
-	home() : apartaments{ nullptr },
-		size{ 7 }, home_number{ "3" }, street{ "street" } {};
+	home() : home (nullptr, 0, "\0", "\0") {};
 
-	//apartment* set_apartaments(apartment* apartaments_p)
-	//{
-	//	
-	//}
+	home(const home& house_p);//конструктор копирования
+
+	//модификаторы и аксессоры
+
+	void set_apartaments(const apartment* apartaments_p, int size_p);
 
 	void set_home_num(const char* home_number_p)
 	{
@@ -29,6 +29,11 @@ public:
 	void set_street(const char* street_p)
 	{
 		strcpy_s(street, street_p);
+	}
+
+	const apartment* get_apartaments() const
+	{
+		return apartaments;
 	}
 
 	int get_size() const
@@ -46,25 +51,15 @@ public:
 		return street;
 	}
 	
-	void print()
-	{
-		cout << "\nквартиры\n";
-		for (int i = 0; i < size; i++)
-		{
-			apartaments[i].print();
-		}
+	void print() const;//показывает всю информацию о доме
 
-		cout << "\nколичество квартир" << size + 1;
-		
-		printf("номер дома %s", home_number);
-		printf("улица %s", street);
-	}
+	apartment* adding(const apartment* apartaments);//добавление в массив объектов apartaments новой квартиры
 
+	apartment* deleting(const apartment* apartaments);//удаление из массива объектов apartaments квартиры
 
-	~home()
+	~home()//деструктор
 	{
 		delete[] apartaments;
 	}
-
 };
 
