@@ -3,7 +3,6 @@
 home::home(apartment* apartaments_p, int size_p, const char* home_number_p, const char* street_p) : apartaments{ new apartment[size_p] },
 size{ size_p }, home_number{ *(home_number_p) }, street{ *(street_p) }//главный конструктор
 {
-
 	for (int i = 0; i < size; i++)
 	{
 		apartaments[i].set_humans(apartaments_p[i].get_humans(), size);
@@ -18,7 +17,7 @@ home::home(const home& house_p) : apartaments{ new apartment[house_p.get_size()]
 {
 	for (int i = 0; i < size; i++)
 	{
-		apartaments[i].set_humans(house_p.apartaments[i].get_humans(), house_p.apartaments[i].get_size());
+		apartaments[i].set_humans(house_p.apartaments[i].get_humans(), size);
 		apartaments[i].set_number_apartament(house_p.apartaments[i].get_number_apartament());
 		apartaments[i].set_size_apartament(house_p.apartaments[i].get_size_apartament());
 	}
