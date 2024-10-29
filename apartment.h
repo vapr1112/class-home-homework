@@ -51,9 +51,9 @@ public:
 
 	void print() const;// показывает всю информацию о квартире
 
-	human* adding(const human* humans); //добавление в массив объектов humans нового человека
+	human* adding(); //добавление в массив объектов humans нового человека
 
-	human* deleting(const human* humans);//удадение из массива объектов humans человека
+	human* deleting();//удадение из массива объектов humans человека
 
 	~apartment()//деструктор
 	{

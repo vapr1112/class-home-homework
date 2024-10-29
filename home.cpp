@@ -1,8 +1,11 @@
 #include "home.h"
 
 home::home(apartment* apartaments_p, int size_p, const char* home_number_p, const char* street_p) : apartaments{ new apartment[size_p] },
-size{ size_p }, home_number{ *(home_number_p) }, street{ *(street_p) }//главный конструктор
+size{ size_p } //главный конструктор
 {
+	strcpy_s(home_number, strlen(home_number_p) + 1, home_number_p);
+	strcpy_s(street, strlen(street_p) + 1, street_p);
+
 	for (int i = 0; i < size; i++)
 	{
 		apartaments[i].set_humans(apartaments_p[i].get_humans(), size);
@@ -12,9 +15,11 @@ size{ size_p }, home_number{ *(home_number_p) }, street{ *(street_p) }//главный 
 	//инициализируем массив объектов квартира
 }
 
-home::home(const home& house_p) : apartaments{ new apartment[house_p.get_size()] }, size{ house_p.get_size() },
-								home_number{ *(house_p.get_home_number()) }, street{ *(house_p.get_street()) }//конструктор копирования
+home::home(const home& house_p) : apartaments{ new apartment[house_p.get_size()] }, size{ house_p.get_size() }//конструктор копирования
 {
+	strcpy_s(home_number, strlen(house_p.get_home_number()) + 1, house_p.get_home_number());
+	strcpy_s(street, strlen(house_p.get_street() + 1), house_p.get_street());
+
 	for (int i = 0; i < size; i++)
 	{
 		apartaments[i].set_humans(house_p.apartaments[i].get_humans(), size);
@@ -25,7 +30,10 @@ home::home(const home& house_p) : apartaments{ new apartment[house_p.get_size()]
 
 void home:: set_apartaments(const apartment* apartaments_p, int size_p)
 {
-	delete[] apartaments;
+	if (apartaments)
+	{
+		delete[] apartaments;
+	}//начинает ломаться здесь
 
 	size = size_p;
 	
@@ -55,7 +63,7 @@ void home::print() const//показывает всю информацию о доме
 	printf("\nулица %s", street);
 }
 
-apartment* home::adding(const apartment* apartaments)//добавление в массив объектов apartaments новой квартиры
+apartment* home::adding()//добавление в массив объектов apartaments новой квартиры
 {
 	apartment* new_apartaments = new apartment[++size];
 	human* humans;
@@ -77,7 +85,7 @@ apartment* home::adding(const apartment* apartaments)//добавление в массив объек
 
 	for (int i = 0; i < size_humans; i++)
 	{
-		new_apartaments[size - 1].set_humans(new_apartaments[size - 1].adding(humans), size_humans);
+		new_apartaments[size - 1].set_humans(new_apartaments[size - 1].adding(), size_humans);
 	}
 
 	cin.ignore();
@@ -88,12 +96,15 @@ apartment* home::adding(const apartment* apartaments)//добавление в массив объек
 	new_apartaments[size - 1].set_number_apartament(number_apartament);
 	new_apartaments[size - 1].set_size_apartament(size_apartament);
 
-	delete[] apartaments;
+	if (apartaments)
+	{
+		delete[] apartaments;
+	}//возможно, здесь и в начале метода set_apartaments происходит два удаления одного и того же динамических массива
 
 	return new_apartaments;
 }
 
-apartment* home::deleting(const apartment* apartaments)//удаление из массива объектов apartaments квартиры
+apartment* home::deleting()//удаление из массива объектов apartaments квартиры
 {
 	apartment* new_apartaments = new apartment[--size];
 

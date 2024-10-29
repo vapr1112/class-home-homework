@@ -16,9 +16,10 @@ public:
 
 	human() : human(18, "Ivanov Ivan", "\0") {};// конструктор по умолчанию
 
-	human(const human& human_p) : age{human_p.age}, fio{new char[strlen(human_p.fio) + 1] }, number_phone{*(human_p.number_phone)}//конструктор копирования
+	human(const human& human_p) : age{human_p.age}, fio{new char[strlen(human_p.fio) + 1] }//конструктор копирования
 	{
 		strcpy_s(fio, strlen(human_p.fio) + 1, human_p.fio);
+		strcpy_s(number_phone, strlen(human_p.number_phone) + 1, human_p.number_phone);
 	}
 	//модификаторы и аксессоры
 	void set_age(int age_p)

@@ -53,9 +53,9 @@ public:
 	
 	void print() const;//показывает всю информацию о доме
 
-	apartment* adding(const apartment* apartaments);//добавление в массив объектов apartaments новой квартиры
+	apartment* adding();//добавление в массив объектов apartaments новой квартиры
 
-	apartment* deleting(const apartment* apartaments);//удаление из массива объектов apartaments квартиры
+	apartment* deleting();//удаление из массива объектов apartaments квартиры
 
 	~home()//деструктор
 	{

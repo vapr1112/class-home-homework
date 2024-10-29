@@ -1,8 +1,10 @@
 #include "apartment.h"
 
 apartment::apartment(human* humans_p, int size_p, const char* number_apartament_p, const char* size_apartament_p)//главный конструктор
-	: humans{ new human[size_p] }, size{ size_p }, number_apartament{ *(number_apartament_p) }, size_apartament{ *(size_apartament_p) }
+	: humans{ new human[size_p] }, size{ size_p }
 {
+	strcpy_s(number_apartament, strlen(number_apartament_p) + 1, number_apartament_p);
+	strcpy_s(size_apartament, strlen(size_apartament_p) + 1, size_apartament_p);
 	for (int i = 0; i < size; i++)
 	{
 		humans[i].set_age(humans_p[i].age_get());
@@ -11,9 +13,11 @@ apartment::apartment(human* humans_p, int size_p, const char* number_apartament_
 	}//инициализируем массив объектов человек 
 }
 
-apartment:: apartment(const apartment& apartaments_p) : humans{ new human[apartaments_p.size] }, size{ apartaments_p.size },
-number_apartament{ *(apartaments_p.number_apartament) }, size_apartament{ *(apartaments_p.size_apartament) }//конструктор копирования
+apartment:: apartment(const apartment& apartaments_p) : humans{ new human[apartaments_p.size] }, size{ apartaments_p.size }//конструктор копирования
 {
+	strcpy_s(number_apartament, strlen(apartaments_p.number_apartament) + 1, apartaments_p.number_apartament);
+	strcpy_s(size_apartament, strlen(apartaments_p.size_apartament) + 1, apartaments_p.size_apartament);
+
 	for (int i = 0; i < size; i++)
 	{
 		humans[i].set_age(apartaments_p.humans[i].age_get());
@@ -53,7 +57,7 @@ void apartment:: print() const// показывает всю информацию о квартире
 	printf("площадь квартиры %s", size_apartament);
 }
 
-human* apartment:: adding(const human* humans) //добавление в массив объектов humans нового человека
+human* apartment:: adding() //добавление в массив объектов humans нового человека
 {
 	human* new_humans = new human[++size];
 
@@ -82,7 +86,7 @@ human* apartment:: adding(const human* humans) //добавление в массив объектов hu
 	return new_humans;
 }
 
-human* apartment:: deleting(const human* humans)//удадение из массива объектов humans человека
+human* apartment:: deleting()//удадение из массива объектов humans человека
 {
 	human* new_humans = new human[--size];
 

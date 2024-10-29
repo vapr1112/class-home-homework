@@ -1,6 +1,6 @@
 #include "Header.h"
 
-void print(home house)
+void print(home& house)
 {
 	int user;
 
@@ -35,7 +35,7 @@ void print(home house)
 	}
 }
 
-void adding(home house)
+void adding(home& house)
 {
 	int user;
 
@@ -49,7 +49,7 @@ void adding(home house)
 	{
 	case APART:
 		
-		house.set_apartaments(house.adding(house.get_apartaments()), house.get_size());
+		house.set_apartaments(house.adding(), house.get_size());
 		break;
 	default:
 		break;
