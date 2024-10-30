@@ -9,7 +9,7 @@ human::human(int age_p, const char* fio_p, const char* num_phone_p) : age{ age_p
 
 void human:: set_fio(const char* fio_p)
 {
-	int size = strlen(fio_p) + 1;
+	int size =  strlen(fio_p) + 1; 
 
 	delete[] fio;
 

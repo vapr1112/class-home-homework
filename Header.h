@@ -4,5 +4,3 @@
 #include "apartment.h"
 
 void print(home& house);
-
-void adding(home& house);

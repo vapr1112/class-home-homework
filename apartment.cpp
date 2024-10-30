@@ -41,20 +41,23 @@ void apartment:: set_humans(const human* humans_p, int size_p)
 		humans[i].set_number_phone(humans_p[i].get_number_phone());
 	}
 
-	delete[] humans_p;
+	//if (size != 0)
+	//{
+	//	delete[] humans_p;
+	//}
 }
 
 void apartment:: print() const// показывает всю информацию о квартире
 {
-	cout << "\nлюди\n";
+	printf("\nномер квартиры %s", number_apartament);
+	printf("\nплощадь квартиры %s", size_apartament);
+
 	for (int i = 0; i < size; i++)
 	{
 		humans[i].print();
 	}
-	cout << "\nколичество людей " << size + 1;
+	cout << "\nколичество людей " <<  size;
 
-	printf("номер квартиры %s", number_apartament);
-	printf("площадь квартиры %s", size_apartament);
 }
 
 human* apartment:: adding() //добавление в массив объектов humans нового человека
@@ -81,8 +84,6 @@ human* apartment:: adding() //добавление в массив объектов humans нового человек
 	new_humans[size - 1].set_fio(fio);
 	new_humans[size - 1].set_number_phone(number_phone);
 
-	delete[] humans;
-
 	return new_humans;
 }
 
@@ -96,8 +97,6 @@ human* apartment:: deleting()//удадение из массива объектов humans человека
 		new_humans[i].set_fio(humans[i].get_fio());
 		new_humans[i].set_number_phone(humans[i].get_number_phone());
 	}
-
-	delete[] humans;
 
 	return new_humans;
 }

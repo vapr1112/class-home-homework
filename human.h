@@ -52,9 +52,9 @@ public:
 	
 	void print() const// ввывод информации о человеке
 	{
-		cout << "возраст " << age;
-		printf("фио %s",fio);
-		printf("номер телефона %s",number_phone);
+		cout << "\nвозраст " << age;
+		printf("\nфио %s",fio);
+		printf("\nномер телефона %s",number_phone);
 	}
 
 	~human()//деструктор

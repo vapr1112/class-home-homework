@@ -26,33 +26,11 @@ void print(home& house)
 		{
 			for (int j = 0; j < house.get_apartaments()[i].get_size(); j++)
 			{
-				house.get_apartaments()[i].print();
+				house.get_apartaments()[i].get_humans()[i].print();
 			}
 		}
 		break;
 	default:
 		break;
 	}
-}
-
-void adding(home& house)
-{
-	int user;
-
-	enum menu {APART = 1, HUMAN};
-
-	cout << "\nвыберите, что добавить 1 квартиру 2 человека\n";
-
-	cin >> user;
-
-	switch (user)
-	{
-	case APART:
-		
-		house.set_apartaments(house.adding(), house.get_size());
-		break;
-	default:
-		break;
-	}
-
 }

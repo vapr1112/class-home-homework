@@ -33,7 +33,7 @@ void home:: set_apartaments(const apartment* apartaments_p, int size_p)
 	if (apartaments)
 	{
 		delete[] apartaments;
-	}//начинает ломаться здесь
+	}
 
 	size = size_p;
 	
@@ -41,7 +41,7 @@ void home:: set_apartaments(const apartment* apartaments_p, int size_p)
 
 	for (int i = 0; i < size; i++)
 	{
-		apartaments[i].set_humans(apartaments_p[i].get_humans(), size);
+		apartaments[i].set_humans(apartaments_p[i].get_humans(), apartaments_p[i].get_size());
 		apartaments[i].set_number_apartament(apartaments_p[i].get_number_apartament());
 		apartaments[i].set_size_apartament(apartaments_p[i].get_size_apartament());
 	}
@@ -51,28 +51,27 @@ void home:: set_apartaments(const apartment* apartaments_p, int size_p)
 
 void home::print() const//показывает всю информацию о доме
 {
+	cout << "\nколичество квартир " << size;
+
+	printf("\nномер дома %s", home_number);
+	printf("\nулица %s", street);
+
 	cout << "\nквартиры \n";
 	for (int i = 0; i < size; i++)
 	{
 		apartaments[i].print();
 	}
-
-	cout << "\nколичество квартир " << size + 1;
-
-	printf("\nномер дома %s", home_number);
-	printf("\nулица %s", street);
 }
 
 apartment* home::adding()//добавление в массив объектов apartaments новой квартиры
 {
 	apartment* new_apartaments = new apartment[++size];
 	human* humans;
-	int size_humans = 0;// относится к массиву объектов humans
-	char number_apartament[SIZE], size_apartament[SIZE];
-
+	int age, size_humans = 0;// относится к массиву объектов humans
+	char number_apartament[SIZE], size_apartament[SIZE], fio[SIZE], phone_number[SIZE];
 	for (int i = 0; i < size - 1; i++)
 	{
-		new_apartaments[i].set_humans(apartaments[i].get_humans(), size);
+		new_apartaments[i].set_humans(apartaments[i].get_humans(), apartaments[i].get_size());
 		new_apartaments[i].set_number_apartament(apartaments[i].get_number_apartament());
 		new_apartaments[i].set_size_apartament(apartaments[i].get_size_apartament());
 	}
@@ -85,8 +84,17 @@ apartment* home::adding()//добавление в массив объектов apartaments новой кварти
 
 	for (int i = 0; i < size_humans; i++)
 	{
-		new_apartaments[size - 1].set_humans(new_apartaments[size - 1].adding(), size_humans);
+		cout << "\nвведите возраст, фио и номер телефона нового человека \n";
+		cin >> age;
+		cin.ignore();
+		gets_s(fio);
+		gets_s(phone_number);
+		humans[i].set_age(age);
+		humans[i].set_fio(fio);
+		humans[i].set_number_phone(phone_number);
 	}
+
+	new_apartaments[size - 1].set_humans(humans, size_humans);
 
 	cin.ignore();
 	cout << "\nвведите номер квартиры и площадь квартиры \n";
@@ -95,11 +103,6 @@ apartment* home::adding()//добавление в массив объектов apartaments новой кварти
 
 	new_apartaments[size - 1].set_number_apartament(number_apartament);
 	new_apartaments[size - 1].set_size_apartament(size_apartament);
-
-	if (apartaments)
-	{
-		delete[] apartaments;
-	}//возможно, здесь и в начале метода set_apartaments происходит два удаления одного и того же динамических массива
 
 	return new_apartaments;
 }
@@ -110,12 +113,10 @@ apartment* home::deleting()//удаление из массива объектов apartaments квартиры
 
 	for (int i = 0; i < size - 1; i++)
 	{
-		new_apartaments[i].set_humans(apartaments[i].get_humans(), size);
+		new_apartaments[i].set_humans(apartaments[i].get_humans(), apartaments[i].get_size());
 		new_apartaments[i].set_number_apartament(apartaments[i].get_number_apartament());
 		new_apartaments[i].set_size_apartament(apartaments[i].get_size_apartament());
 	}
-
-	delete[] apartaments;
 
 	return new_apartaments;
 }

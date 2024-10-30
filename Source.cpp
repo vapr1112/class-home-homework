@@ -26,7 +26,7 @@ int main()
 
 	do
 	{
-		cout << "\nвведите \n1 посмотреть \n2 добавить объект \n3 удалить объект\n";
+		cout << "\nвведите \n1 посмотреть \n2 добавить квартиру \n3 удалить квартиру\n";
 		cin >> user;
 
 		switch (user)
@@ -35,7 +35,11 @@ int main()
 			print(house);
 			break;
 		case ADD:
-			adding(house);
+			house.set_apartaments(house.adding(), house.get_size() + 1);
+			break;
+		case DELETE:
+			house.set_apartaments(house.deleting(), house.get_size() - 1);
+			break;
 		default:
 			break;
 		}
