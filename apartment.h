@@ -5,7 +5,7 @@ class apartment
 {
 private:
 	human* humans;//квартира содержит массив объектов(люди)
-	int size;// относится к массиву объектов humans
+	int number_of_human;// относится к массиву объектов humans
 	char number_apartament[SIZE];
 	char size_apartament[SIZE];//площадь квартиры
 public:
@@ -34,9 +34,9 @@ public:
 		return humans;
 	}
 
-	int get_size() const
+	int get_number_of_human() const
 	{
-		return size;
+		return number_of_human;
 	}
 
 	const char* get_number_apartament() const
@@ -51,9 +51,9 @@ public:
 
 	void print() const;// показывает всю информацию о квартире
 
-	human* adding(); //добавление в массив объектов humans нового человека
+	void adding(); //добавление в массив объектов humans нового человека
 
-	human* deleting();//удадение из массива объектов humans человека
+	void deleting();//удадение из массива объектов humans человека
 
 	~apartment()//деструктор
 	{

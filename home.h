@@ -5,7 +5,7 @@ class home
 {
 private:
 	apartment* apartaments;//дом содержит массив объектов(квартиры)
-	int size;// относится к массиву объектов apartaments
+	int number_of_apart;// относится к массиву объектов apartaments
 	char home_number[SIZE];
 	char street[SIZE];
 
@@ -38,7 +38,7 @@ public:
 
 	int get_size() const
 	{
-		return size;
+		return number_of_apart;
 	}
 
 	const char* get_home_number() const
@@ -53,9 +53,9 @@ public:
 	
 	void print() const;//показывает всю информацию о доме
 
-	apartment* adding();//добавление в массив объектов apartaments новой квартиры
+	void adding();//добавление в массив объектов apartaments новой квартиры
 
-	apartment* deleting();//удаление из массива объектов apartaments квартиры
+	void deleting();//удаление из массива объектов apartaments квартиры
 
 	~home()//деструктор
 	{

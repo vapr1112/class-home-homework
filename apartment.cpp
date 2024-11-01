@@ -1,11 +1,11 @@
 #include "apartment.h"
 
 apartment::apartment(human* humans_p, int size_p, const char* number_apartament_p, const char* size_apartament_p)//главный конструктор
-	: humans{ new human[size_p] }, size{ size_p }
+	: humans{ new human[size_p] }, number_of_human{ size_p }
 {
 	strcpy_s(number_apartament, strlen(number_apartament_p) + 1, number_apartament_p);
 	strcpy_s(size_apartament, strlen(size_apartament_p) + 1, size_apartament_p);
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < number_of_human; i++)
 	{
 		humans[i].set_age(humans_p[i].age_get());
 		humans[i].set_fio(humans_p[i].get_fio());
@@ -13,12 +13,12 @@ apartment::apartment(human* humans_p, int size_p, const char* number_apartament_
 	}//инициализируем массив объектов человек 
 }
 
-apartment:: apartment(const apartment& apartaments_p) : humans{ new human[apartaments_p.size] }, size{ apartaments_p.size }//конструктор копирования
+apartment:: apartment(const apartment& apartaments_p) : humans{ new human[apartaments_p.number_of_human] }, number_of_human{ apartaments_p.number_of_human }//конструктор копирования
 {
 	strcpy_s(number_apartament, strlen(apartaments_p.number_apartament) + 1, apartaments_p.number_apartament);
 	strcpy_s(size_apartament, strlen(apartaments_p.size_apartament) + 1, apartaments_p.size_apartament);
 
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < number_of_human; i++)
 	{
 		humans[i].set_age(apartaments_p.humans[i].age_get());
 		humans[i].set_fio(apartaments_p.humans[i].get_fio());
@@ -30,21 +30,16 @@ void apartment:: set_humans(const human* humans_p, int size_p)
 {
 	delete[] humans;
 
-	size = size_p;
+	number_of_human = size_p;
 
-	humans = new human[size];
+	humans = new human[number_of_human];
 
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < number_of_human; i++)
 	{
 		humans[i].set_age(humans_p[i].age_get());
 		humans[i].set_fio(humans_p[i].get_fio());
 		humans[i].set_number_phone(humans_p[i].get_number_phone());
 	}
-
-	//if (size != 0)
-	//{
-	//	delete[] humans_p;
-	//}
 }
 
 void apartment:: print() const// показывает всю информацию о квартире
@@ -52,22 +47,22 @@ void apartment:: print() const// показывает всю информацию о квартире
 	printf("\nномер квартиры %s", number_apartament);
 	printf("\nплощадь квартиры %s", size_apartament);
 
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < number_of_human; i++)
 	{
 		humans[i].print();
 	}
-	cout << "\nколичество людей " <<  size;
+	cout << "\nколичество людей " <<  number_of_human;
 
 }
 
-human* apartment:: adding() //добавление в массив объектов humans нового человека
+void apartment:: adding() //добавление в массив объектов humans нового человека
 {
-	human* new_humans = new human[++size];
+	human* new_humans = new human[++number_of_human];
 
 	int age;
 	char fio[SIZE], number_phone[SIZE];
 
-	for (int i = 0; i < size - 1; i++)
+	for (int i = 0; i < number_of_human - 1; i++)
 	{
 		new_humans[i].set_age(humans[i].age_get());
 		new_humans[i].set_fio(humans[i].get_fio());
@@ -80,23 +75,27 @@ human* apartment:: adding() //добавление в массив объектов humans нового человек
 	gets_s(fio);
 	gets_s(number_phone);
 
-	new_humans[size - 1].set_age(age);
-	new_humans[size - 1].set_fio(fio);
-	new_humans[size - 1].set_number_phone(number_phone);
+	new_humans[number_of_human - 1].set_age(age);
+	new_humans[number_of_human - 1].set_fio(fio);
+	new_humans[number_of_human - 1].set_number_phone(number_phone);
 
-	return new_humans;
+	delete[] humans;
+
+	humans = new_humans;
 }
 
-human* apartment:: deleting()//удадение из массива объектов humans человека
+void apartment:: deleting()//удадение из массива объектов humans человека
 {
-	human* new_humans = new human[--size];
+	human* new_humans = new human[--number_of_human];
 
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < number_of_human; i++)
 	{
 		new_humans[i].set_age(humans[i].age_get());
 		new_humans[i].set_fio(humans[i].get_fio());
 		new_humans[i].set_number_phone(humans[i].get_number_phone());
 	}
 
-	return new_humans;
+	delete[] humans;
+
+	humans = new_humans;
 }

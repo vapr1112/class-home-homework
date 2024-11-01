@@ -35,10 +35,10 @@ int main()
 			print(house);
 			break;
 		case ADD:
-			house.set_apartaments(house.adding(), house.get_size() + 1);
+			house.adding();
 			break;
 		case DELETE:
-			house.set_apartaments(house.deleting(), house.get_size() - 1);
+			house.deleting();
 			break;
 		default:
 			break;

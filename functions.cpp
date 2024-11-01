@@ -24,9 +24,9 @@ void print(home& house)
 	case HUMAN:
 		for (int i = 0; i < house.get_size(); i++)
 		{
-			for (int j = 0; j < house.get_apartaments()[i].get_size(); j++)
+			for (int j = 0; j < house.get_apartaments()[i].get_number_of_human(); j++)
 			{
-				house.get_apartaments()[i].get_humans()[i].print();
+				house.get_apartaments()[i].get_humans()[j].print();
 			}
 		}
 		break;
